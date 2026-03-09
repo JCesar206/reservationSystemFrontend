@@ -1,18 +1,6 @@
-import { useState } from "react";
 import { FaHome, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { useTranslation } from "react-i18next";
-
-const texts = {
-	es: {
-		copyright: "Sistema de Reservaciones V1.0.",
-		rights: "Todos los derechos reservados.",
-	},
-	en: {
-		copyright: "Reservation System V1.0.",
-		rights: "All rights reserved."
-	},
-};
 
 export default function Footer() {
 	const { t } = useTranslation();
