@@ -88,21 +88,12 @@ export default function Reservas() {
 
       {/* Formulario */}
       <form onSubmit={handleSubmit} className="mb-4 space-y-2">
-        <input
-          type="datetime-local"
-          name="fecha"
-          value={formData.fecha}
-          onChange={handleChange}
-          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-          required
+        <input type="datetime-local" name="fecha" value={formData.fecha} onChange={handleChange}
+          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" required
         />
 
-        <select
-          name="UsuarioId"
-          value={formData.UsuarioId}
-          onChange={handleChange}
-          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-          required
+        <select name="UsuarioId" value={formData.UsuarioId} onChange={handleChange}
+          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" required
         >
           <option value="">Selecciona Usuario</option>
           {usuarios.map((u) => (
@@ -112,12 +103,8 @@ export default function Reservas() {
           ))}
         </select>
 
-        <select
-          name="RecursoId"
-          value={formData.RecursoId}
-          onChange={handleChange}
-          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-          required
+        <select name="RecursoId" value={formData.RecursoId} onChange={handleChange}
+          className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" required
         >
           <option value="">Selecciona Recurso</option>
           {recursos.map((r) => (
@@ -129,14 +116,14 @@ export default function Reservas() {
 
         <button
           type="submit"
-          className="px-4 py-2 bg-purple-600 hover:bg-purple-800 text-white font-semibold rounded cursor-pointer"
+          className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-800 cursor-pointer"
         >
           {editingId ? "Actualizar Reserva" : "Crear Reserva"}
         </button>
       </form>
 
       {/* Tabla de reservas */}
-      <table className="w-full border-collapse rounded">
+      <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-200 dark:bg-gray-700">
             <th className="border p-2">ID</th>
@@ -154,15 +141,14 @@ export default function Reservas() {
               <td className="border p-2">{res.Usuario?.nombre}</td>
               <td className="border p-2">{res.Recurso?.nombre}</td>
               <td className="border p-2 space-x-2">
-                <button
-                  onClick={() => handleEdit(res)}
-                  className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
+                <button onClick={() => handleEdit(res)}
+                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-700 cursor-pointer"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleDelete(res.id)}
-                  className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
+                  className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-800 cursor-pointer"
                 >
                   Eliminar
                 </button>
