@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { FaHome, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+import { useTranslation } from "react-i18next";
 
 const texts = {
 	es: {
@@ -12,8 +14,8 @@ const texts = {
 	},
 };
 
-export default function Footer({ language = "es" }) {
-	const t = texts[language];
+export default function Footer() {
+	const { t } = useTranslation();
 
 	return (
 	<footer className="w-full px-4 py-6">
@@ -42,7 +44,7 @@ export default function Footer({ language = "es" }) {
         	</a>
 				</div>
 			{/*Copyright*/}
-			<p className="text-sm text-gray-500 dark:text-gray-400 text-center font-bold">&copy; {new Date().getFullYear()} {t.copyright} | Juls | {t.rights}</p>
+			<p className="text-sm text-gray-500 dark:text-gray-400 text-center font-bold">&copy; {new Date().getFullYear()} {t("copyright")} | Juls | {t("rights")}</p>
 			</div>
 		</div>
 		</footer>
