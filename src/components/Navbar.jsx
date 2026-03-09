@@ -1,41 +1,40 @@
 import { useState } from "react";
-import { FaSun, FaMoon, FaSearch, FaEnvelope } from "react-icons/fa";
-// import { BsTranslate } from "react-icons/bs";
+import { useAppContext } from "../context/AppContext";
+import { useTranslation } from "react-i18next";
+import { MoonIcon, SunIcon, MagnifyingGlassIcon, LanguageIcon } from "@heroicons/react/24/outline";
 
-export default function Navbar({ onThemeToggle, onLangToggle, onSearch }) {
+export default function Navbar({ onSearch }) {
+  const { theme, toggleTheme, lang, toggleLang } = useAppContext();
   const [query, setQuery] = useState("");
+  const { t } = useTranslation();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch(query);
+    if (query.trim() !== "") {
+      onSearch(query);
+    }
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-blue-600 dark:bg-gray-900 text-white">
-      <h1 className="text-xl font-bold">Sistema de Reservas</h1>
+    <nav className="flex items-center justify-between p-4 bg-blue-300 dark:bg-gray-900 text-white">
+      <h1 className="text-xl font-bold">{t("system")}</h1>
 
-      {/* Barra de búsqueda */}
+      {/* Barra de Busqueda */}
       <form onSubmit={handleSearch} className="flex items-center">
-        <input
-          type="text"
-          placeholder="Buscar reserva..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="p-2 rounded text-white font-semibold border-2"
-        />
+        <input type="text" placeholder={t("search")} value={query} onChange={(e) => setQuery(e.target.value)} className="p-2 rounded text-white font-semibold border-2" title={t("search1")}/>
         <button type="submit" className="ml-2">
-          <FaSearch size={18} className="cursor-pointer"/>
+          <MagnifyingGlassIcon className="h-6 w-6 cursor-pointer"/>
         </button>
       </form>
 
       {/* Controles */}
       <div className="flex space-x-4">
-        <button onClick={onThemeToggle}>
-          <FaSun size={18} className="cursor-pointer"/>
-          <FaMoon size={18} className="cursor-pointer"/>
+        <button onClick={toggleTheme}>
+          {theme === "light" ? <MoonIcon className="h-6 w-6 cursor-pointer" /> : <SunIcon className="h-6 w-6 cursor-pointer" />}
         </button>
-        <button onClick={onLangToggle}>
-          <FaEnvelope size={18} className="cursor-pointer"/>
+        <button onClick={toggleLang}>
+          <LanguageIcon className="h-6 w-6 cursor-pointer" />
+          <span className="ml-1">{lang.toUpperCase()}</span>
         </button>
       </div>
     </nav>
