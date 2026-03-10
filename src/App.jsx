@@ -18,7 +18,6 @@ function App() {
 
   return (
     <Router>
-    {/* <div className={theme}> */}
       <Navbar onThemeToggle={toggleTheme} onLangToggle={toggleLang} onSearch={(q) => console.log("Buscar:", q)} />
       <main className="container mx-auto p-4 min-h-screen">
         <Routes>
@@ -30,7 +29,6 @@ function App() {
         </Routes>
       </main>
       <Footer />
-    {/* </div> */}
     </Router>
   );
 }
