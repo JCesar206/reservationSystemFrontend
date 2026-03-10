@@ -11,7 +11,7 @@ const resources = {
 			reset: "Restablecer contraseña",
 			system: "Sistema de Reservas",
 			search: "Buscar reserva...",
-			search1: "Buscar",
+			system: "Sistema de Reservaciones V 1.0",
 			createUser: "Crear usuario",
 			clear: "Limpiar",
 			name: "Nombre",
@@ -29,7 +29,7 @@ const resources = {
 			date: "Fecha",
 			user: "Usuario",
 			resource: "Recurso",
-			copyright: "Sistema de Reservaciones V1.0",
+			copyright: "Sistema de Reservaciones V 1.0",
 			rights: "Todos los derechos reservados."
 		}
 	},
@@ -42,7 +42,7 @@ const resources = {
 			reset: "Reset password",
 			system: "Reservation System",
 			search: "Search reservation...",
-			search1: "Find",
+			system: "Reservation System v 1.0",
 			createUser: "Create user",
 			clear: "Clear",
 			name: "Name",
@@ -60,7 +60,7 @@ const resources = {
 			date: "Date",
 			user: "User",
 			resource: "Resource",
-			copyright: "System Reservation V1.0",
+			copyright: "Reservation System V 1.0",
 			rights: "All right reserved."
 		}
 	}
