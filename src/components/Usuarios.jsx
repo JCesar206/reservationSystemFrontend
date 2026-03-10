@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
 import api from "../services/api";
 import { useTranslation } from "react-i18next";
 
@@ -107,14 +109,14 @@ export default function Usuarios() {
               <td className="border p-2">{u.email}</td>
               <td className="border p-2 space-x-2">
                 <button onClick={() => handleEdit(u)}
-                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
+                className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
                 >
-                  {t("edit")}
+                  <CiEdit size={16}/>{t("edit")}
                 </button>
                 <button onClick={() => handleDelete(u.id)}
-                className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
+                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
                 >
-                  {t("delete")}
+                  <MdDelete size={16}/>{t("delete")}
                 </button>
               </td>
             </tr>
