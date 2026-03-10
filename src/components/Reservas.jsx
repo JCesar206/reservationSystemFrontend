@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../services/api";
+import { useTranslation} from "react-i18next";
 
 export default function Reservas() {
   const [reservas, setReservas] = useState([]);
@@ -7,6 +8,8 @@ export default function Reservas() {
   const [recursos, setRecursos] = useState([]);
   const [formData, setFormData] = useState({ fecha: "", UsuarioId: "", RecursoId: "" });
   const [editingId, setEditingId] = useState(null);
+  const { t } = useTranslation();
+  const fechaRef = useRef(null);
 
   // Cargar datos al inicio
   useEffect(() => {
@@ -62,6 +65,12 @@ export default function Reservas() {
     }
   };
 
+  const handleClear = () => {
+    setFormData({ fecha: "", UsuarioId: "", RecursoId: "" });
+    setEditingId(null);
+    fechaRef.current?.focus();
+  };
+
   const handleEdit = (reserva) => {
     setFormData({
       fecha: reserva.fecha,
@@ -83,7 +92,7 @@ export default function Reservas() {
   return (
     <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
       <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-        Reservas
+        {t("reservations")}
       </h2>
 
       {/* Formulario */}
@@ -95,7 +104,7 @@ export default function Reservas() {
         <select name="UsuarioId" value={formData.UsuarioId} onChange={handleChange}
           className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" required
         >
-          <option value="">Selecciona Usuario</option>
+          <option value="">{t("selectUser")}</option>
           {usuarios.map((u) => (
             <option key={u.id} value={u.id}>
               {u.nombre} ({u.email})
@@ -106,7 +115,7 @@ export default function Reservas() {
         <select name="RecursoId" value={formData.RecursoId} onChange={handleChange}
           className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white" required
         >
-          <option value="">Selecciona Recurso</option>
+          <option value="">{t("selectResource")}</option>
           {recursos.map((r) => (
             <option key={r.id} value={r.id}>
               {r.nombre} ({r.tipo})
@@ -114,12 +123,16 @@ export default function Reservas() {
           ))}
         </select>
 
-        <button
-          type="submit"
+        <div className="flex space-x-2">
+          <button type="submit"
           className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-800 cursor-pointer"
-        >
-          {editingId ? "Actualizar Reserva" : "Crear Reserva"}
-        </button>
+          >
+            {editingId ? t("updatedReservation") : t("createReservation")}
+          </button>
+          <button type="button" onClick={handleClear} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 cursor-pointer">
+          {t("clear")}
+          </button>
+        </div>
       </form>
 
       {/* Tabla de reservas */}
@@ -127,10 +140,10 @@ export default function Reservas() {
         <thead>
           <tr className="bg-gray-200 dark:bg-gray-700">
             <th className="border p-2">ID</th>
-            <th className="border p-2">Fecha</th>
-            <th className="border p-2">Usuario</th>
-            <th className="border p-2">Recurso</th>
-            <th className="border p-2">Acciones</th>
+            <th className="border p-2">{t("date")}</th>
+            <th className="border p-2">{t("user")}</th>
+            <th className="border p-2">{t("resource")}</th>
+            <th className="border p-2">{t("actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -142,15 +155,15 @@ export default function Reservas() {
               <td className="border p-2">{res.Recurso?.nombre}</td>
               <td className="border p-2 space-x-2">
                 <button onClick={() => handleEdit(res)}
-                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-700 cursor-pointer"
+                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
                 >
-                  Editar
+                  {t("edit")}
                 </button>
                 <button
                   onClick={() => handleDelete(res.id)}
-                  className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-800 cursor-pointer"
+                  className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
                 >
-                  Eliminar
+                  {t("delete")}
                 </button>
               </td>
             </tr>

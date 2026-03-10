@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../services/api";
+import { useTranslation } from "react-i18next";
 
 export default function Recursos() {
   const [recursos, setRecursos] = useState([]);
   const [formData, setFormData] = useState({ nombre: "", tipo: "" });
   const [editingId, setEditingId] = useState(null);
+  const nombreRef = useRef(null);
+  const { t } = useTranslation();
 
   // Cargar recursos al inicio
   useEffect(() => {
@@ -40,6 +43,12 @@ export default function Recursos() {
     }
   };
 
+  const handleClear = () => {
+    setFormData({ nombre: "", tipo: "" });
+    setEditingId(null);
+    nombreRef.current?.focus();
+  };
+
   const handleEdit = (recurso) => {
     setFormData({ nombre: recurso.nombre, tipo: recurso.tipo });
     setEditingId(recurso.id);
@@ -57,24 +66,28 @@ export default function Recursos() {
   return (
     <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
       <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-        Recursos
+        {t("resources")}
       </h2>
 
       {/* Formulario */}
       <form onSubmit={handleSubmit} className="mb-4 space-y-2">
-        <input type="text" name="nombre" placeholder="Nombre del recurso" value={formData.nombre}
+        <input type="text" name="nombre" placeholder={t("resourceName")} value={formData.nombre}
           onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
           required
         />
-        <input type="text" name="tipo" placeholder="Tipo (ej. Sala, PC)" value={formData.tipo}
+        <input type="text" name="tipo" placeholder={t("resourceType")} value={formData.tipo}
           onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
         />
-        <button
-          type="submit"
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-800 cursor-pointer"
-        >
-          {editingId ? "Actualizar Recurso" : "Crear Recurso"}
-        </button>
+
+        <div className="flex space-x-2">
+          <button type="submit"
+          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-800 cursor-pointer">
+          {editingId ? t("updatedResource") : t("createResource")}
+          </button>
+          <button type="button" onClick={handleClear} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 cursor-pointer">
+          {t("clear")}
+          </button>
+        </div>
       </form>
 
       {/* Tabla de recursos */}
@@ -82,9 +95,9 @@ export default function Recursos() {
         <thead>
           <tr className="bg-gray-200 dark:bg-gray-700">
             <th className="border p-2">ID</th>
-            <th className="border p-2">Nombre</th>
-            <th className="border p-2">Tipo</th>
-            <th className="border p-2">Acciones</th>
+            <th className="border p-2">{t("resourceName")}</th>
+            <th className="border p-2">{t("resourceType")}</th>
+            <th className="border p-2">{t("actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -95,14 +108,14 @@ export default function Recursos() {
               <td className="border p-2">{r.tipo}</td>
               <td className="border p-2 space-x-2">
                 <button onClick={() => handleEdit(r)}
-                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-700 cursor-pointer"
+                className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 cursor-pointer"
                 >
-                  Editar
+                  {t("edit")}
                 </button>
                 <button onClick={() => handleDelete(r.id)}
-                className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-800 cursor-pointer"
+                className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
                 >
-                  Eliminar
+                  {t("delete")}
                 </button>
               </td>
             </tr>
