@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import api from "../services/api";
 import { useTranslation} from "react-i18next";
 
-export default function Reservas() {
+export default function Reservas({ searchResults }) {
   const [reservas, setReservas] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [recursos, setRecursos] = useState([]);
@@ -18,6 +18,14 @@ export default function Reservas() {
     fetchRecursos();
   }, []);
 
+  useEffect(() => {
+    if (searchResults.length > 0) {
+      setReservas(searchResults);
+    } else {
+      fetchReservas(); // Carga normal si no hay búsqueda
+    }
+  }, [searchResults]);
+  
   const fetchReservas = async () => {
     try {
       const res = await api.get("/reservas");
