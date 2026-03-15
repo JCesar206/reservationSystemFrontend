@@ -6,7 +6,7 @@ const resources = {
 		translation: {
 			users: "Usuarios",
 			resources: "Recursos",
-			reservations: "Reservas",
+			bookings: "Reservas",
 			login: "Iniciar sesión",
 			reset: "Restablecer contraseña",
 			system: "Sistema de Reservas",
@@ -30,19 +30,22 @@ const resources = {
 			user: "Usuario",
 			resource: "Recurso",
 			copyright: "Sistema de Reservaciones V 1.0",
-			rights: "Todos los derechos reservados."
+			rights: "Todos los derechos reservados.",
+			light: "Claro",
+			dark: "Oscuro",
+			logout: "Cerrar sesión"
 		}
 	},
 	en: {
 		translation: {
 			users: "Users",
 			resources: "Resources",
-			reservations: "Bookings",
+			bookings: "Bookings",
 			login: "Login",
 			reset: "Reset password",
 			system: "Reservation System",
 			search: "Search reservation...",
-			system: "Reservation System v 1.0",
+			system: "Reservation System V 1.0",
 			createUser: "Create user",
 			clear: "Clear",
 			name: "Name",
@@ -61,7 +64,10 @@ const resources = {
 			user: "User",
 			resource: "Resource",
 			copyright: "Reservation System V 1.0",
-			rights: "All right reserved."
+			rights: "All right reserved.",
+			light: "Light",
+			dark: "Dark",
+			logout: "Logout"
 		}
 	}
 };
